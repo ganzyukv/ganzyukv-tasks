@@ -12,6 +12,15 @@
 
 function haveSameItems(array $arr1, array $arr2)
 {
-    // Ваш код
+    if(count($arr1) !== count($arr2)){
+        return false;
+    }
+
+    foreach($arr1 as $value){
+        if(!in_array($value, $arr2)){
+            return false;
+        }
+
+    }
     return true;
 }
