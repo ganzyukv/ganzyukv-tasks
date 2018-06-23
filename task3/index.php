@@ -2,11 +2,12 @@
 
 class Emitter
 {
+    private $observers = [];
     /**
      * Создает экземпляр класса Emitter.
      * @memberof Emitter
      */
-    public function constructor()
+    public function __constructor()
     {
         // Ваш код
     }
@@ -19,7 +20,7 @@ class Emitter
      */
     public function on($event, $handler)
     {
-        // Ваш код
+        $this->observers[$event][] = $handler;
     }
 
     /**
@@ -31,6 +32,12 @@ class Emitter
      */
     public function emit($event, $data)
     {
-        // Ваш код
+        if(array_key_exists($event, $this->observers)){
+            foreach($this->observers[$event] as $e){
+                if(is_callable($e)){
+                    $e($data);
+                }
+            }
+        }
     }
 }
